@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hugo on 3^5の備忘録</title>
+    <link>https://sagojo.dev/tags/hugo/</link>
+    <description>Recent content in Hugo on 3^5の備忘録</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 09 Aug 2020 00:17:04 +0900</lastBuildDate>
+    
+	<atom:link href="https://sagojo.dev/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ブログ立てました</title>
+      <link>https://sagojo.dev/blog/first/</link>
+      <pubDate>Sun, 09 Aug 2020 00:17:04 +0900</pubDate>
+      
+      <guid>https://sagojo.dev/blog/first/</guid>
+      <description>初めまして。3^5です。
+今回初めてブログを立てたので 作業の詳細について書いていこうと思います。
+使ったのはGoで書かれた静的サイトジェネレータHugoです。  個人的にRustが好きなので Rust製の静的サイトジェネレータのZolaを使おうとも考えたのですが、
+使っている人口的に資料やテーマの数が少なかったためHugoを選びました。
+実際ツール使うだけなので書かれてる言語は速度面以外だとほとんど関係ないですね。
+テーマはとりあえずhugo-future-imperfect-slimを使っています。
+ブログを立てるまでに行った作業はこんな感じです。
+ Hugoのインストール リポジトリの初期化 ドメインを取る GitHub Pagesの設定 記事を書く  それぞれの詳細を解説していきます。
+1.Hugoのインストール 僕は普段使っている環境がArch Linuxなのでそのままパッケージマネージャで導入しました。
+yay -S hugo Ubuntuなんかでもaptに入ってるっぽいので多分大丈夫だと思います。
+2.リポジトリの初期化 新しいサイトの生成は次のコマンドで行います。
+hugo new site mysite mysiteのところは好きな名前にしてください。
+次に、テーマの追加をします。
+https://themes.gohugo.io/で好きなテーマを選び、
+先ほど初期化したディレクトリ(ここではmysite)の中のthemes/に引っ張ってきます。
+mkdir themes cd themes git submodule add https://github.com/pacollins/hugo-future-imperfect-slim.git ここからは選んだテーマによって作業が大きく異なりそうですが、
+僕はダウンロードしてきたテーマのexampleSiteを書き換えながら作業を始めようと思い、
+まずこれを作業ディレクトリのルートに展開しました。
+cp -r themes/hugo-future-imperfect-slim/exampleSite/* ./ cpで変なファイル消されると怖いので、
+-iコマンドを付けてファイルを上書きするときに確認させてもいいと思います。
+これでhugo server -Dを実行するとサンプルサイトがlocalhostで立ち上がります。
+contents以下が記事なので好きなように作り換えていきましょう。
+新しい記事はhugo new blog/first.mdとかやると生成できます。
+僕が採用したテーマは多言語対応だったので日本語を選択しそれ以外を消したのですが、
+日本語も微妙だったので書き換えました。
+(Aboutが約とかになっている時点でまあそうですよねーとなりました)
+Hugoはユーザが書いた設定を優先して見に行くので
+themes/hugo-future-imperfect-slim/layout/i18n/ja.tomlを
+/i18n/ja.tomlにコピーしていろいろ書き換えています。
+3.ドメインを取る 好きに取ってください。 僕はGoogle Domainsで取りました。</description>
+    </item>
+    
+  </channel>
+</rss>

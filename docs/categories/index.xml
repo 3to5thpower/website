@@ -5,9 +5,19 @@
     <link>https://sagojo.dev/categories/</link>
     <description>Recent content in Categories on 3^5の備忘録</description>
     <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 09 Aug 2020 00:17:04 +0900</lastBuildDate>
     
 	<atom:link href="https://sagojo.dev/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>technologies</title>
+      <link>https://sagojo.dev/categories/technologies/</link>
+      <pubDate>Sun, 09 Aug 2020 00:17:04 +0900</pubDate>
+      
+      <guid>https://sagojo.dev/categories/technologies/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

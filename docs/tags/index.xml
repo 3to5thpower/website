@@ -5,9 +5,28 @@
     <link>https://sagojo.dev/tags/</link>
     <description>Recent content in Tags on 3^5の備忘録</description>
     <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 09 Aug 2020 00:17:04 +0900</lastBuildDate>
     
 	<atom:link href="https://sagojo.dev/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>blog</title>
+      <link>https://sagojo.dev/tags/blog/</link>
+      <pubDate>Sun, 09 Aug 2020 00:17:04 +0900</pubDate>
+      
+      <guid>https://sagojo.dev/tags/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hugo</title>
+      <link>https://sagojo.dev/tags/hugo/</link>
+      <pubDate>Sun, 09 Aug 2020 00:17:04 +0900</pubDate>
+      
+      <guid>https://sagojo.dev/tags/hugo/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

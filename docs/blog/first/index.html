@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+  <meta charset="utf-8">
+<title>ブログ立てました - 3^5の備忘録</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png?v=1">
+  <link rel="manifest" href="/favicon/site.webmanifest?v=1">
+  
+  <meta name="msapplication-TileColor" content="#f0f8ff">
+  <meta name="theme-color" content="#f0f8ff">
+
+<meta name="generator" content="Hugo 0.73.0" /><meta itemprop="name" content="ブログ立てました">
+<meta itemprop="description" content="初めまして。3^5です。
+今回初めてブログを立てたので 作業の詳細について書いていこうと思います。
+使ったのはGoで書かれた静的サイトジェネレータHugoです。  個人的にRustが好きなので Rust製の静的サイトジェネレータのZolaを使おうとも考えたのですが、
+使っている人口的に資料やテーマの数が少なかったためHugoを選びました。
+実際ツール使うだけなので書かれてる言語は速度面以外だとほとんど関係ないですね。
+テーマはとりあえずhugo-future-imperfect-slimを使っています。
+ブログを立てるまでに行った作業はこんな感じです。
+ Hugoのインストール リポジトリの初期化 ドメインを取る GitHub Pagesの設定 記事を書く  それぞれの詳細を解説していきます。
+1.Hugoのインストール 僕は普段使っている環境がArch Linuxなのでそのままパッケージマネージャで導入しました。
+yay -S hugo Ubuntuなんかでもaptに入ってるっぽいので多分大丈夫だと思います。
+2.リポジトリの初期化 新しいサイトの生成は次のコマンドで行います。
+hugo new site mysite mysiteのところは好きな名前にしてください。
+次に、テーマの追加をします。
+https://themes.gohugo.io/で好きなテーマを選び、
+先ほど初期化したディレクトリ(ここではmysite)の中のthemes/に引っ張ってきます。
+mkdir themes cd themes git submodule add https://github.com/pacollins/hugo-future-imperfect-slim.git ここからは選んだテーマによって作業が大きく異なりそうですが、
+僕はダウンロードしてきたテーマのexampleSiteを書き換えながら作業を始めようと思い、
+まずこれを作業ディレクトリのルートに展開しました。
+cp -r themes/hugo-future-imperfect-slim/exampleSite/* ./ cpで変なファイル消されると怖いので、
+-iコマンドを付けてファイルを上書きするときに確認させてもいいと思います。
+これでhugo server -Dを実行するとサンプルサイトがlocalhostで立ち上がります。
+contents以下が記事なので好きなように作り換えていきましょう。
+新しい記事はhugo new blog/first.mdとかやると生成できます。
+僕が採用したテーマは多言語対応だったので日本語を選択しそれ以外を消したのですが、
+日本語も微妙だったので書き換えました。
+(Aboutが約とかになっている時点でまあそうですよねーとなりました)
+Hugoはユーザが書いた設定を優先して見に行くので
+themes/hugo-future-imperfect-slim/layout/i18n/ja.tomlを
+/i18n/ja.tomlにコピーしていろいろ書き換えています。
+3.ドメインを取る 好きに取ってください。 僕はGoogle Domainsで取りました。">
+<meta itemprop="datePublished" content="2020-08-09T00:17:04&#43;09:00" />
+<meta itemprop="dateModified" content="2020-08-09T00:17:04&#43;09:00" />
+<meta itemprop="wordCount" content="89">
+
+
+
+<meta itemprop="keywords" content="blog,Hugo," /><meta property="og:title" content="ブログ立てました" />
+<meta property="og:description" content="初めまして。3^5です。
+今回初めてブログを立てたので 作業の詳細について書いていこうと思います。
+使ったのはGoで書かれた静的サイトジェネレータHugoです。  個人的にRustが好きなので Rust製の静的サイトジェネレータのZolaを使おうとも考えたのですが、
+使っている人口的に資料やテーマの数が少なかったためHugoを選びました。
+実際ツール使うだけなので書かれてる言語は速度面以外だとほとんど関係ないですね。
+テーマはとりあえずhugo-future-imperfect-slimを使っています。
+ブログを立てるまでに行った作業はこんな感じです。
+ Hugoのインストール リポジトリの初期化 ドメインを取る GitHub Pagesの設定 記事を書く  それぞれの詳細を解説していきます。
+1.Hugoのインストール 僕は普段使っている環境がArch Linuxなのでそのままパッケージマネージャで導入しました。
+yay -S hugo Ubuntuなんかでもaptに入ってるっぽいので多分大丈夫だと思います。
+2.リポジトリの初期化 新しいサイトの生成は次のコマンドで行います。
+hugo new site mysite mysiteのところは好きな名前にしてください。
+次に、テーマの追加をします。
+https://themes.gohugo.io/で好きなテーマを選び、
+先ほど初期化したディレクトリ(ここではmysite)の中のthemes/に引っ張ってきます。
+mkdir themes cd themes git submodule add https://github.com/pacollins/hugo-future-imperfect-slim.git ここからは選んだテーマによって作業が大きく異なりそうですが、
+僕はダウンロードしてきたテーマのexampleSiteを書き換えながら作業を始めようと思い、
+まずこれを作業ディレクトリのルートに展開しました。
+cp -r themes/hugo-future-imperfect-slim/exampleSite/* ./ cpで変なファイル消されると怖いので、
+-iコマンドを付けてファイルを上書きするときに確認させてもいいと思います。
+これでhugo server -Dを実行するとサンプルサイトがlocalhostで立ち上がります。
+contents以下が記事なので好きなように作り換えていきましょう。
+新しい記事はhugo new blog/first.mdとかやると生成できます。
+僕が採用したテーマは多言語対応だったので日本語を選択しそれ以外を消したのですが、
+日本語も微妙だったので書き換えました。
+(Aboutが約とかになっている時点でまあそうですよねーとなりました)
+Hugoはユーザが書いた設定を優先して見に行くので
+themes/hugo-future-imperfect-slim/layout/i18n/ja.tomlを
+/i18n/ja.tomlにコピーしていろいろ書き換えています。
+3.ドメインを取る 好きに取ってください。 僕はGoogle Domainsで取りました。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sagojo.dev/blog/first/" />
+<meta property="article:published_time" content="2020-08-09T00:17:04+09:00" />
+<meta property="article:modified_time" content="2020-08-09T00:17:04+09:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ブログ立てました"/>
+<meta name="twitter:description" content="初めまして。3^5です。
+今回初めてブログを立てたので 作業の詳細について書いていこうと思います。
+使ったのはGoで書かれた静的サイトジェネレータHugoです。  個人的にRustが好きなので Rust製の静的サイトジェネレータのZolaを使おうとも考えたのですが、
+使っている人口的に資料やテーマの数が少なかったためHugoを選びました。
+実際ツール使うだけなので書かれてる言語は速度面以外だとほとんど関係ないですね。
+テーマはとりあえずhugo-future-imperfect-slimを使っています。
+ブログを立てるまでに行った作業はこんな感じです。
+ Hugoのインストール リポジトリの初期化 ドメインを取る GitHub Pagesの設定 記事を書く  それぞれの詳細を解説していきます。
+1.Hugoのインストール 僕は普段使っている環境がArch Linuxなのでそのままパッケージマネージャで導入しました。
+yay -S hugo Ubuntuなんかでもaptに入ってるっぽいので多分大丈夫だと思います。
+2.リポジトリの初期化 新しいサイトの生成は次のコマンドで行います。
+hugo new site mysite mysiteのところは好きな名前にしてください。
+次に、テーマの追加をします。
+https://themes.gohugo.io/で好きなテーマを選び、
+先ほど初期化したディレクトリ(ここではmysite)の中のthemes/に引っ張ってきます。
+mkdir themes cd themes git submodule add https://github.com/pacollins/hugo-future-imperfect-slim.git ここからは選んだテーマによって作業が大きく異なりそうですが、
+僕はダウンロードしてきたテーマのexampleSiteを書き換えながら作業を始めようと思い、
+まずこれを作業ディレクトリのルートに展開しました。
+cp -r themes/hugo-future-imperfect-slim/exampleSite/* ./ cpで変なファイル消されると怖いので、
+-iコマンドを付けてファイルを上書きするときに確認させてもいいと思います。
+これでhugo server -Dを実行するとサンプルサイトがlocalhostで立ち上がります。
+contents以下が記事なので好きなように作り換えていきましょう。
+新しい記事はhugo new blog/first.mdとかやると生成できます。
+僕が採用したテーマは多言語対応だったので日本語を選択しそれ以外を消したのですが、
+日本語も微妙だったので書き換えました。
+(Aboutが約とかになっている時点でまあそうですよねーとなりました)
+Hugoはユーザが書いた設定を優先して見に行くので
+themes/hugo-future-imperfect-slim/layout/i18n/ja.tomlを
+/i18n/ja.tomlにコピーしていろいろ書き換えています。
+3.ドメインを取る 好きに取ってください。 僕はGoogle Domainsで取りました。"/>
+<meta name="twitter:site" content="@sagoj0_"/>
+<link rel="stylesheet" href="/css/bundle.min.d9e04ae08c9b3049b766dbd4aeab7d862c5ea1d13679b621490e0f5df5507497.css" integrity="sha256-2eBK4IybMEm3ZtvUrqt9hixeodE2ebYhSQ4PXfVQdJc="><link rel="stylesheet" href="/css/add-on.css">
+</head>
+
+  <body>
+    
+
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/" class="nav">
+        
+          blog
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu menu">
+      
+        
+          
+          <a href="/" class="nav link"><i class='fa fa-home'></i> Home</a>
+        
+      
+        
+          
+          <a href="/about/" class="nav link"><i class='far fa-id-card'></i> About</a>
+        
+      
+        
+          
+          <a href="/blog/" class="nav link"><i class='far fa-newspaper'></i> Blog</a>
+        
+      
+        
+          
+          <a href="/categories/" class="nav link"><i class='fas fa-sitemap'></i> Categories</a>
+        
+      
+        
+          
+          <a href="/contact/" class="nav link"><i class='far fa-envelope'></i> Contact</a>
+        
+      
+      <a href="#share-menu" class="nav link share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      <a href="#search-input" class="nav link search-toggle"><i class="fas fa-search">&nbsp;</i>Search</a>
+    </menu>
+    <a href="#search-input" class="nav search-toggle"><i class="fas fa-search fa-2x">&nbsp;</i></a>
+    <a href="#share-menu" class="nav share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    
+    <a href="#site-nav" class="nav nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="search" class="menu"><input id="search-input" class="search-input menu"></input><div id="search-results" class="search-results menu"></div></menu>
+  
+  
+    <menu id="share-menu" class="flyout-menu menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=%e3%83%96%e3%83%ad%e3%82%b0%e7%ab%8b%e3%81%a6%e3%81%be%e3%81%97%e3%81%9f&amp;url=https%3a%2f%2fsagojo.dev%2fblog%2ffirst%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsagojo.dev%2fblog%2ffirst%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=%e3%81%93%e3%81%ae%e6%8a%95%e7%a8%bf%e3%82%92%e3%83%81%e3%82%a7%e3%83%83%e3%82%af%e3%81%99%e3%82%8b %7b%20%20%20%20%20%20%20%20map%5b%5d%7d&amp;body=https%3a%2f%2fsagojo.dev%2fblog%2ffirst%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro" >
+  <a href="/"><img src="https://sagojo.dev/img/main/icon.jpg" class="circle" width="100" alt="sagoj0_" /></a>
+  <header>
+    <h1>3^5の備忘録</h1>
+  </header>
+  <main>
+    <p>技術系や艦これの話を書きます。</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/3to5thpower" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/sagoj0_" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:is0468ri@ed.ritsumei.ac.jp" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        
+  <article class="post">
+    <header>
+  <div class="title">
+    
+      <h2><a href="/blog/first/">ブログ立てました</a></h2>
+    
+    
+  </div>
+  <div class="meta">
+    <time datetime="2020-08-09 00:17:04 &#43;0900 JST">2020-08-09</time>
+    
+    
+  </div>
+</header>
+
+    <div id="socnet-share">
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=%e3%83%96%e3%83%ad%e3%82%b0%e7%ab%8b%e3%81%a6%e3%81%be%e3%81%97%e3%81%9f&amp;url=https%3a%2f%2fsagojo.dev%2fblog%2ffirst%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsagojo.dev%2fblog%2ffirst%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=%e3%81%93%e3%81%ae%e6%8a%95%e7%a8%bf%e3%82%92%e3%83%81%e3%82%a7%e3%83%83%e3%82%af%e3%81%99%e3%82%8b %7b%20%20%20%20%20%20%20%20map%5b%5d%7d&amp;body=https%3a%2f%2fsagojo.dev%2fblog%2ffirst%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </div>
+    <div class="content">
+      
+      <p>初めまして。3^5です。<br>
+今回初めてブログを立てたので
+作業の詳細について書いていこうと思います。<br>
+使ったのはGoで書かれた静的サイトジェネレータ<a href="https://gohugo.io/">Hugo</a>です。
+<figure class="center">
+    <img src="/img/tech/gohugoio-card.png"/> 
+</figure>
+</p>
+<p>個人的にRustが好きなので
+Rust製の静的サイトジェネレータの<a href="https://www.getzola.org/">Zola</a>を使おうとも考えたのですが、<br>
+使っている人口的に資料やテーマの数が少なかったためHugoを選びました。<br>
+実際ツール使うだけなので書かれてる言語は速度面以外だとほとんど関係ないですね。<br>
+テーマはとりあえず<a href="https://themes.gohugo.io/hugo-future-imperfect-slim/">hugo-future-imperfect-slim</a>を使っています。</p>
+<p>ブログを立てるまでに行った作業はこんな感じです。</p>
+<ol>
+<li>Hugoのインストール</li>
+<li>リポジトリの初期化</li>
+<li>ドメインを取る</li>
+<li>GitHub Pagesの設定</li>
+<li>記事を書く</li>
+</ol>
+<p>それぞれの詳細を解説していきます。</p>
+<h3 id="1hugoのインストール">1.Hugoのインストール</h3>
+<p>僕は普段使っている環境がArch Linuxなのでそのままパッケージマネージャで導入しました。</p>
+<pre><code>yay -S hugo
+</code></pre><p>Ubuntuなんかでもaptに入ってるっぽいので多分大丈夫だと思います。</p>
+<h3 id="2リポジトリの初期化">2.リポジトリの初期化</h3>
+<p>新しいサイトの生成は次のコマンドで行います。</p>
+<pre><code>hugo new site mysite
+</code></pre><p>mysiteのところは好きな名前にしてください。</p>
+<p>次に、テーマの追加をします。<br>
+<a href="https://themes.gohugo.io/">https://themes.gohugo.io/</a>で好きなテーマを選び、<br>
+先ほど初期化したディレクトリ(ここではmysite)の中のthemes/に引っ張ってきます。</p>
+<pre><code>mkdir themes
+cd themes
+git submodule add https://github.com/pacollins/hugo-future-imperfect-slim.git
+</code></pre><p>ここからは選んだテーマによって作業が大きく異なりそうですが、<br>
+僕はダウンロードしてきたテーマのexampleSiteを書き換えながら作業を始めようと思い、<br>
+まずこれを作業ディレクトリのルートに展開しました。</p>
+<pre><code>cp -r themes/hugo-future-imperfect-slim/exampleSite/* ./
+</code></pre><p>cpで変なファイル消されると怖いので、<br>
+-iコマンドを付けてファイルを上書きするときに確認させてもいいと思います。</p>
+<p>これで<code>hugo server -D</code>を実行するとサンプルサイトがlocalhostで立ち上がります。<br>
+contents以下が記事なので好きなように作り換えていきましょう。<br>
+新しい記事は<code>hugo new blog/first.md</code>とかやると生成できます。</p>
+<p>僕が採用したテーマは多言語対応だったので日本語を選択しそれ以外を消したのですが、<br>
+日本語も微妙だったので書き換えました。<br>
+(Aboutが約とかになっている時点でまあそうですよねーとなりました)</p>
+<p>Hugoはユーザが書いた設定を優先して見に行くので<br>
+<code>themes/hugo-future-imperfect-slim/layout/i18n/ja.toml</code>を<br>
+<code>/i18n/ja.toml</code>にコピーしていろいろ書き換えています。</p>
+<h3 id="3ドメインを取る">3.ドメインを取る</h3>
+<p>好きに取ってください。
+僕はGoogle Domainsで取りました。<br>
+取ったらDNS設定のところでGitHubのレコードを登録します。<br>
+<figure>
+    <img src="/img/tech/github-ip.png"/> 
+</figure>
+</p>
+<p>登録するレコードはこの4つです。<br>
+ただしこれは2020年8月のものなのでちゃんと確認してから追加しましょう。</p>
+<h3 id="4github-pagesの設定">4.GitHub Pagesの設定</h3>
+<p>GitHub Pagesは静的サイトを無料で公開できるホスティングサービスです。<br>
+独自ドメインも設定できるので、先程買ったものが使えます。</p>
+<p>今作業しているディレクトリをGitHubのリポジトリにpushしたら、<br>
+リポジトリのsettings/options/GitHub Pagesから設定できます。</p>
+<figure>
+    <img src="/img/tech/github-pages-settings.png"/> 
+</figure>
+
+<h3 id="5記事を書く">5.記事を書く</h3>
+<p>好きに書きましょう。<br>
+あとは公開するだけです。</p>
+<hr>
+<h2 id="終わりに">終わりに</h2>
+<p>こんな感じでブログ立てました。<br>
+本当はVPS借りてサーバ立ててやろうという意気込みがあったのですが、<br>
+<del>そして実際に途中までやっていましたが、</del><br>
+結局面倒くさくなってこっちにしました。<br>
+まあコストが低いほうが長続きもしそうなので、ゆるーくやっていきたいと思います。</p>
+<p>読んでいただいてありがとうございました！</p>
+
+    </div>
+    <footer>
+      <div class="stats">
+  
+    <ul class="categories">
+      
+        
+          <li><a class="article-terms-link" href="/categories/technologies/">technologies</a></li>
+        
+      
+    </ul>
+  
+  
+    <ul class="tags">
+      
+        
+          <li><a class="article-terms-link" href="/tags/blog/">blog</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/hugo/">Hugo</a></li>
+        
+      
+    </ul>
+  
+</div>
+
+    </footer>
+  </article>
+  
+    
+  <article class="post">
+    
+    <div>
+      <h2 id="say-something">コメントをどうぞ</h2>
+        <form id="comment-form" class="new-comment" method="POST">
+          
+          <h3 class='reply-notice hidden'>
+            <span class='reply-name'></span>
+          </h3>
+
+          
+          <input type="hidden" name="options[entryId]" value="165c0d31e51947192f6a7ff62753c769">
+          <input type='hidden' name='fields[replyThread]' value=''>
+          <input type='hidden' name='fields[replyID]' value=''>
+          <input type='hidden' name='fields[replyName]' value=''>
+
+          
+          <input required name='fields[name]' type='text' placeholder='名前'>
+          <textarea required name='fields[body]' placeholder='内容' rows='10'></textarea>
+
+          
+          
+
+          
+          <div class='submit-notice'>
+            <strong class='submit-notice-text submit-success hidden'>コメントありがとうございます！承認されるとサイトに表示されます。</strong>
+            <strong class='submit-notice-text submit-failed hidden'>申し訳ありません。送信中にエラーが発生しました。必須入力フィールドがすべて入力されていることを確認して、もう一度やりなおしてください。</strong>
+          </div>
+
+          
+          <input type='submit' value='送信する' class='button'>
+          <input type='submit' value='送信しました' class='hidden button' disabled>
+          <input type='reset' value='リセット' class='button'>
+        </form>
+    </div>
+
+    
+    <div>
+      <h2>コメント</h2><p>まだコメントはありません.</p>
+      
+    </div>
+  </article>
+
+
+  
+  <div class="pagination">
+    
+    
+  </div>
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>最近の投稿</h1>
+      </header>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/first/">ブログ立てました</a></h2>
+          <time class="published" datetime="2020-08-09 00:17:04 &#43;0900 JST">2020-08-09</time>
+        </header>
+      </article>
+      
+      
+    </section>
+  
+
+  
+    
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+          
+          <li>
+              <a href="/categories/technologies/">technologies<span class="count">1</span></a>
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/3to5thpower" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/sagoj0_" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:is0468ri@ed.ritsumei.ac.jp" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    © 2020 3^5の備忘録
+      <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.73.0' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      <script src="/js/highlight.js"></script>
+    
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.3c56a98e24f57831b0f107da00143440b7a2bd20bb724682e50cd99b60471fef.js" integrity="sha256-PFapjiT1eDGw8QfaABQ0QLeivSC7ckaC5QzZm2BHH&#43;8="></script>
+    <script src="/js/add-on.js"></script>
+    </div>
+  </body>
+</html>

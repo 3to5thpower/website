@@ -3,24 +3,51 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://sagojo.dev/about/</loc>
-    <lastmod>2019-02-28T00:00:00+00:00</lastmod>
+    <loc>https://sagojo.dev/</loc>
+    <lastmod>2020-08-09T00:17:04+09:00</lastmod>
   </url>
   
   <url>
-    <loc>https://sagojo.dev/</loc>
+    <loc>https://sagojo.dev/blog/</loc>
+    <lastmod>2020-08-09T00:17:04+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sagojo.dev/tags/blog/</loc>
+    <lastmod>2020-08-09T00:17:04+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://sagojo.dev/categories/</loc>
+    <lastmod>2020-08-09T00:17:04+09:00</lastmod>
   </url>
   
   <url>
-    <loc>https://sagojo.dev/contact/</loc>
+    <loc>https://sagojo.dev/tags/hugo/</loc>
+    <lastmod>2020-08-09T00:17:04+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://sagojo.dev/tags/</loc>
+    <lastmod>2020-08-09T00:17:04+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sagojo.dev/categories/technologies/</loc>
+    <lastmod>2020-08-09T00:17:04+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sagojo.dev/blog/first/</loc>
+    <lastmod>2020-08-09T00:17:04+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sagojo.dev/about/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sagojo.dev/contact/</loc>
   </url>
   
 </urlset>

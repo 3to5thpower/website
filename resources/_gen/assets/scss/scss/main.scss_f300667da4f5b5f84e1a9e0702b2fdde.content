@@ -75,7 +75,8 @@ iframe,
 img,
 svg,
 video {
-  vertical-align: middle; }
+  vertical-align: middle;
+  max-width: 100%; }
 
 /*
 * Remove default fieldset styles.
