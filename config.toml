@@ -31,7 +31,7 @@ publishDir              = "docs"
   hideEmptyStats        = true
 
   [params.meta]
-    description         = "A theme by HTML5 UP, ported by Julio Pescador. Slimmed and enhanced by Patrick Collins. Multilingual by StatnMap. Powered by Hugo."
+    description         = "sagoj0_の備忘録的なブログです。技術系の話題や艦これについて話します。"
     author              = "sagoj0_"
     favicon             = true
     svg                 = false

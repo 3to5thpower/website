@@ -6,4 +6,5 @@ author = "Hugo Authors"
 layout = "about"
 +++
 
-unimplemented...
+コンピュータサイエンスと艦これが好きな関西の大学生です。  
+
