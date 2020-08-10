@@ -14,6 +14,13 @@ publishDir              = "docs"
 [markup.goldmark.renderer]
   unsafe= false
 
+[markup]
+    [markup.tableOfContents]
+        endLevel = 2
+        ordered = true
+        startLevel = 2
+
+
 [outputs]
   home                  = ["html", "json"]
 

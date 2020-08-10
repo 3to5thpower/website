@@ -1,0 +1,33 @@
+{{ define "main" }}
+  <article class="post">
+    {{ .Render "header" }}
+    <div id="socnet-share">
+      {{ partial "share-buttons" . }}
+    </div>
+    <div class="content">
+      {{ .Render "featured" }}
+      {{ $first_h2 := index (findRE "<h2 id.*?>" .Content 1) 0 }}
+      {{ .Scratch.Set "first_h2" $first_h2}}
+      {{ if and (.Params.toc) (.Scratch.Get "first_h2") }}
+        {{ $toc_and_h2 := printf "%s\n%s" (partial "toc.html" . ) (.Scratch.Get "first_h2")}}
+        {{ replace .Content (.Scratch.Get "first_h2") $toc_and_h2 | safeHTML }}
+      {{ else }}
+        {{ .Content }}
+      {{ end }}
+    </div>
+    <footer>
+      {{ .Render "stats" }}
+    </footer>
+  </article>
+  {{ if not ( eq .Params.comments false) }}
+    {{ .Render "comments" }}
+  {{ end }}
+  <div class="pagination">
+    {{ if .NextInSection }}
+      <a href="{{ .NextInSection.RelPermalink }}" class="button left"><span>{{ .NextInSection.Title }}</span></a>
+    {{ end }}
+    {{ if .PrevInSection }}
+      <a href="{{ .PrevInSection.RelPermalink }}" class="button right"><span>{{ .PrevInSection.Title }}</span></a>
+    {{ end }}
+  </div>
+{{ end }}
