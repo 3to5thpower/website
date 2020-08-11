@@ -6,13 +6,13 @@ title                   = "3^5の備忘録"
 theme                   = "hugo-future-imperfect-slim"
 paginate                = 3
 disqusShortname         = ""
-googleAnalytics         = ""
+googleAnalytics         = "UA-175159177-1"
 pluralizeListTitles     = false
 disableLanguages        = []
 publishDir              = "docs"
 
 [markup.goldmark.renderer]
-  unsafe= false
+  unsafe= true
 
 [markup]
     [markup.tableOfContents]
@@ -36,6 +36,7 @@ publishDir              = "docs"
   imageStretch          = "h"
   socialShare           = ["twitter", "facebook", "email"]
   hideEmptyStats        = true
+  comments              = false
 
   [params.meta]
     description         = "sagoj0_の備忘録的なブログです。技術系の話題や艦これについて話します。"

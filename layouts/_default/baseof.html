@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="ja">
+  {{- partial "analytics" . -}}
+  {{ partial "head" . }}
+  <body>
+    {{ partial "site-header" . }}
+    <div id="wrapper">
+      {{ partial "site-intro" . }}
+      <main id="site-main">
+        {{ block "main" . }}{{ end }}
+      </main>
+      {{ partial "site-sidebar" . }}
+      {{ partial "site-footer" . }}
+      {{ partial "scripts" . }}
+    </div>
+  </body>
+</html>
