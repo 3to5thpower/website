@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+  <meta charset="utf-8">
+<title>ファンコミュニケーションズ オンラインインターン参加記 - 3^5の備忘録</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png?v=1">
+  <link rel="manifest" href="/favicon/site.webmanifest?v=1">
+  
+  <meta name="msapplication-TileColor" content="#f0f8ff">
+  <meta name="theme-color" content="#f0f8ff">
+
+<meta name="generator" content="Hugo 0.73.0" /><meta itemprop="name" content="ファンコミュニケーションズ オンラインインターン参加記">
+<meta itemprop="description" content="株式会社ファンコミュニケーションズさんで
+8月3日から7日までの5日間オンラインインターンをさせていただいたので、
+参加記をまとめたいと思います。
+参加の経緯 サポーターズさんの22卒対象エンジニア1on1面談イベントで、
+趣味でRustでCコンパイラを作っているという話をしたところ、
+インターンにRustの枠を新しく設けて参加させていただけるというお誘いをいただき、
+参加する運びとなりました。
+やー本当に、ありがたいお話です…！
+選考は一応エントリーシートの提出, 面接, 技術テストと、
+恐らく普通のインターンと同じような段取りで行われていたと思います。
+(今回が初めてなので確証はないですが…)
+こんな感じで選考を終え、インターン初日を迎えました。
+成果物 その前に作ったものを説明します。 DSPと呼ばれるWeb広告の配信仲介サーバです。
+スマホなどでポップアップで広告を表示するアプリは、SSPと呼ばれるサーバに表示する広告をリクエストします。
+SSPはそれを受けて複数のDSPに広告をリクエストします。
+それぞれのDSPから渡された広告の中で最も入札金額が高いものがSSPの返却する広告として選ばれるっぽいです。
+DSPの話に戻りますが、SSPに広告を選ばせるために、
+DSPはSSPからリクエストされると持っている広告データの中から適切な広告を1つ選んで返却します。
+広告データには入札金額などは定められていないので、DSPの中でいい感じに決定します。 (ここで機械学習などが使われます。)
+  DSPがやることをまとめると、
+ SSPからのリクエストを受け取る データベースから入っている広告データをn個取ってくる n個の広告のうち、リクエストしてきたアプリケーションをブロック対象としている広告を除外する
+(競合アプリに広告出したりはしないですよね、多分) 除外後の広告達を機械学習APIに投げ、それぞれの入札金額を決定してもらう SSPのリクエストで指定されていた最低入札金額よりも低い金額の広告を除外 残った広告の中で最も高い入札金額の広告をSSPに返却する  このような流れになります。
+その他DSPが行う作業として、
+ アプリケーションから表示完了の通知を受け取る アプリケーションから広告をクリックしたという通知を受け取る 全てのリクエスト・レスポンスのログを出力する  などが今回要求されました。
+私が今回製作したmini-dspはプログラム部分は全てRustを使って実装しており、
+シンプルな設計と速度が特徴となっています。
+1日目 10時にメンターの方と顔合わせのミーティングを行い、
+そのまま課題についての説明をしていただきました。
+先ほどのDSPとSSPなどの仕組みの話は全く知らなかったので、この説明がなければ死んでいたと思います。
+感謝ですね…！
+課題説明が40〜50分くらいで終わったので、
+その後に実装の簡単な段取りを考えました。
+ リクエストを受け取って適当なレスポンスを返すサーバ部分を書く 機械学習APIのモックを作る ログ機能を実装する イベント通知を受け取る機能を書く DBから広告を取得する部分を書く  大体これを一日1つ〜2つ実装していけば終わりそうかな、という見積もりでした。
+ここまでが午前中の話で、午後からは実装に入りました。
+1日目の実装はサーバと機械学習APIのモックの作成でした。
+サーバはRustの軽量・高速なWebフレームワークであるactix-webを使いました。   初めて使う上に、アップデートが激しいため見つかる参考資料も古いものが多くそこそこ苦労しましたが、とりあえず動く状態まで実装することができました。
+17時を目処にプルリクを投げ、ミーティングでコードレビューをしていただきました。
+2日目 2日目は特にミーティングを行うこともなく朝から実装に入りました。">
+<meta itemprop="datePublished" content="2020-08-11T18:00:00&#43;09:00" />
+<meta itemprop="dateModified" content="2020-08-11T18:00:00&#43;09:00" />
+<meta itemprop="wordCount" content="110">
+
+
+
+<meta itemprop="keywords" content="インターン,Rust," /><meta property="og:title" content="ファンコミュニケーションズ オンラインインターン参加記" />
+<meta property="og:description" content="株式会社ファンコミュニケーションズさんで
+8月3日から7日までの5日間オンラインインターンをさせていただいたので、
+参加記をまとめたいと思います。
+参加の経緯 サポーターズさんの22卒対象エンジニア1on1面談イベントで、
+趣味でRustでCコンパイラを作っているという話をしたところ、
+インターンにRustの枠を新しく設けて参加させていただけるというお誘いをいただき、
+参加する運びとなりました。
+やー本当に、ありがたいお話です…！
+選考は一応エントリーシートの提出, 面接, 技術テストと、
+恐らく普通のインターンと同じような段取りで行われていたと思います。
+(今回が初めてなので確証はないですが…)
+こんな感じで選考を終え、インターン初日を迎えました。
+成果物 その前に作ったものを説明します。 DSPと呼ばれるWeb広告の配信仲介サーバです。
+スマホなどでポップアップで広告を表示するアプリは、SSPと呼ばれるサーバに表示する広告をリクエストします。
+SSPはそれを受けて複数のDSPに広告をリクエストします。
+それぞれのDSPから渡された広告の中で最も入札金額が高いものがSSPの返却する広告として選ばれるっぽいです。
+DSPの話に戻りますが、SSPに広告を選ばせるために、
+DSPはSSPからリクエストされると持っている広告データの中から適切な広告を1つ選んで返却します。
+広告データには入札金額などは定められていないので、DSPの中でいい感じに決定します。 (ここで機械学習などが使われます。)
+  DSPがやることをまとめると、
+ SSPからのリクエストを受け取る データベースから入っている広告データをn個取ってくる n個の広告のうち、リクエストしてきたアプリケーションをブロック対象としている広告を除外する
+(競合アプリに広告出したりはしないですよね、多分) 除外後の広告達を機械学習APIに投げ、それぞれの入札金額を決定してもらう SSPのリクエストで指定されていた最低入札金額よりも低い金額の広告を除外 残った広告の中で最も高い入札金額の広告をSSPに返却する  このような流れになります。
+その他DSPが行う作業として、
+ アプリケーションから表示完了の通知を受け取る アプリケーションから広告をクリックしたという通知を受け取る 全てのリクエスト・レスポンスのログを出力する  などが今回要求されました。
+私が今回製作したmini-dspはプログラム部分は全てRustを使って実装しており、
+シンプルな設計と速度が特徴となっています。
+1日目 10時にメンターの方と顔合わせのミーティングを行い、
+そのまま課題についての説明をしていただきました。
+先ほどのDSPとSSPなどの仕組みの話は全く知らなかったので、この説明がなければ死んでいたと思います。
+感謝ですね…！
+課題説明が40〜50分くらいで終わったので、
+その後に実装の簡単な段取りを考えました。
+ リクエストを受け取って適当なレスポンスを返すサーバ部分を書く 機械学習APIのモックを作る ログ機能を実装する イベント通知を受け取る機能を書く DBから広告を取得する部分を書く  大体これを一日1つ〜2つ実装していけば終わりそうかな、という見積もりでした。
+ここまでが午前中の話で、午後からは実装に入りました。
+1日目の実装はサーバと機械学習APIのモックの作成でした。
+サーバはRustの軽量・高速なWebフレームワークであるactix-webを使いました。   初めて使う上に、アップデートが激しいため見つかる参考資料も古いものが多くそこそこ苦労しましたが、とりあえず動く状態まで実装することができました。
+17時を目処にプルリクを投げ、ミーティングでコードレビューをしていただきました。
+2日目 2日目は特にミーティングを行うこともなく朝から実装に入りました。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sagojo.dev/blog/intern_fancom20/" />
+<meta property="article:published_time" content="2020-08-11T18:00:00+09:00" />
+<meta property="article:modified_time" content="2020-08-11T18:00:00+09:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ファンコミュニケーションズ オンラインインターン参加記"/>
+<meta name="twitter:description" content="株式会社ファンコミュニケーションズさんで
+8月3日から7日までの5日間オンラインインターンをさせていただいたので、
+参加記をまとめたいと思います。
+参加の経緯 サポーターズさんの22卒対象エンジニア1on1面談イベントで、
+趣味でRustでCコンパイラを作っているという話をしたところ、
+インターンにRustの枠を新しく設けて参加させていただけるというお誘いをいただき、
+参加する運びとなりました。
+やー本当に、ありがたいお話です…！
+選考は一応エントリーシートの提出, 面接, 技術テストと、
+恐らく普通のインターンと同じような段取りで行われていたと思います。
+(今回が初めてなので確証はないですが…)
+こんな感じで選考を終え、インターン初日を迎えました。
+成果物 その前に作ったものを説明します。 DSPと呼ばれるWeb広告の配信仲介サーバです。
+スマホなどでポップアップで広告を表示するアプリは、SSPと呼ばれるサーバに表示する広告をリクエストします。
+SSPはそれを受けて複数のDSPに広告をリクエストします。
+それぞれのDSPから渡された広告の中で最も入札金額が高いものがSSPの返却する広告として選ばれるっぽいです。
+DSPの話に戻りますが、SSPに広告を選ばせるために、
+DSPはSSPからリクエストされると持っている広告データの中から適切な広告を1つ選んで返却します。
+広告データには入札金額などは定められていないので、DSPの中でいい感じに決定します。 (ここで機械学習などが使われます。)
+  DSPがやることをまとめると、
+ SSPからのリクエストを受け取る データベースから入っている広告データをn個取ってくる n個の広告のうち、リクエストしてきたアプリケーションをブロック対象としている広告を除外する
+(競合アプリに広告出したりはしないですよね、多分) 除外後の広告達を機械学習APIに投げ、それぞれの入札金額を決定してもらう SSPのリクエストで指定されていた最低入札金額よりも低い金額の広告を除外 残った広告の中で最も高い入札金額の広告をSSPに返却する  このような流れになります。
+その他DSPが行う作業として、
+ アプリケーションから表示完了の通知を受け取る アプリケーションから広告をクリックしたという通知を受け取る 全てのリクエスト・レスポンスのログを出力する  などが今回要求されました。
+私が今回製作したmini-dspはプログラム部分は全てRustを使って実装しており、
+シンプルな設計と速度が特徴となっています。
+1日目 10時にメンターの方と顔合わせのミーティングを行い、
+そのまま課題についての説明をしていただきました。
+先ほどのDSPとSSPなどの仕組みの話は全く知らなかったので、この説明がなければ死んでいたと思います。
+感謝ですね…！
+課題説明が40〜50分くらいで終わったので、
+その後に実装の簡単な段取りを考えました。
+ リクエストを受け取って適当なレスポンスを返すサーバ部分を書く 機械学習APIのモックを作る ログ機能を実装する イベント通知を受け取る機能を書く DBから広告を取得する部分を書く  大体これを一日1つ〜2つ実装していけば終わりそうかな、という見積もりでした。
+ここまでが午前中の話で、午後からは実装に入りました。
+1日目の実装はサーバと機械学習APIのモックの作成でした。
+サーバはRustの軽量・高速なWebフレームワークであるactix-webを使いました。   初めて使う上に、アップデートが激しいため見つかる参考資料も古いものが多くそこそこ苦労しましたが、とりあえず動く状態まで実装することができました。
+17時を目処にプルリクを投げ、ミーティングでコードレビューをしていただきました。
+2日目 2日目は特にミーティングを行うこともなく朝から実装に入りました。"/>
+<meta name="twitter:site" content="@sagoj0_"/>
+<link rel="stylesheet" href="/css/bundle.min.d9e04ae08c9b3049b766dbd4aeab7d862c5ea1d13679b621490e0f5df5507497.css" integrity="sha256-2eBK4IybMEm3ZtvUrqt9hixeodE2ebYhSQ4PXfVQdJc="><link rel="stylesheet" href="/css/add-on.css">
+</head>
+
+  <body>
+    
+
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/" class="nav">
+        
+          blog
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu menu">
+      
+        
+          
+          <a href="/" class="nav link"><i class='fa fa-home'></i> Home</a>
+        
+      
+        
+          
+          <a href="/about/" class="nav link"><i class='far fa-id-card'></i> About</a>
+        
+      
+        
+          
+          <a href="/blog/" class="nav link"><i class='far fa-newspaper'></i> Blog</a>
+        
+      
+        
+          
+          <a href="/categories/" class="nav link"><i class='fas fa-sitemap'></i> Categories</a>
+        
+      
+        
+          
+          <a href="/contact/" class="nav link"><i class='far fa-envelope'></i> Contact</a>
+        
+      
+      <a href="#share-menu" class="nav link share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      <a href="#search-input" class="nav link search-toggle"><i class="fas fa-search">&nbsp;</i>Search</a>
+    </menu>
+    <a href="#search-input" class="nav search-toggle"><i class="fas fa-search fa-2x">&nbsp;</i></a>
+    <a href="#share-menu" class="nav share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    
+    <a href="#site-nav" class="nav nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="search" class="menu"><input id="search-input" class="search-input menu"></input><div id="search-results" class="search-results menu"></div></menu>
+  
+  
+    <menu id="share-menu" class="flyout-menu menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=%e3%83%95%e3%82%a1%e3%83%b3%e3%82%b3%e3%83%9f%e3%83%a5%e3%83%8b%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%82%ba%20%e3%82%aa%e3%83%b3%e3%83%a9%e3%82%a4%e3%83%b3%e3%82%a4%e3%83%b3%e3%82%bf%e3%83%bc%e3%83%b3%e5%8f%82%e5%8a%a0%e8%a8%98&amp;url=https%3a%2f%2fsagojo.dev%2fblog%2fintern_fancom20%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsagojo.dev%2fblog%2fintern_fancom20%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=%e3%81%93%e3%81%ae%e6%8a%95%e7%a8%bf%e3%82%92%e3%83%81%e3%82%a7%e3%83%83%e3%82%af%e3%81%99%e3%82%8b %7b%20%20%20%20%20%20%20%20map%5b%5d%7d&amp;body=https%3a%2f%2fsagojo.dev%2fblog%2fintern_fancom20%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro" >
+  <a href="/"><img src="https://sagojo.dev/img/main/icon.jpg" class="circle" width="100" alt="sagoj0_" /></a>
+  <header>
+    <h1>3^5の備忘録</h1>
+  </header>
+  <main>
+    <p>技術系や艦これの話を書きます。</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/3to5thpower" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/sagoj0_" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:is0468ri@ed.ritsumei.ac.jp" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        
+  <article class="post">
+    <header>
+  <div class="title">
+    
+      <h2><a href="/blog/intern_fancom20/">ファンコミュニケーションズ オンラインインターン参加記</a></h2>
+    
+    
+  </div>
+  <div class="meta">
+    <time datetime="2020-08-11 18:00:00 &#43;0900 JST">2020-08-11</time>
+    
+    
+  </div>
+</header>
+
+    <div id="socnet-share">
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=%e3%83%95%e3%82%a1%e3%83%b3%e3%82%b3%e3%83%9f%e3%83%a5%e3%83%8b%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%82%ba%20%e3%82%aa%e3%83%b3%e3%83%a9%e3%82%a4%e3%83%b3%e3%82%a4%e3%83%b3%e3%82%bf%e3%83%bc%e3%83%b3%e5%8f%82%e5%8a%a0%e8%a8%98&amp;url=https%3a%2f%2fsagojo.dev%2fblog%2fintern_fancom20%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsagojo.dev%2fblog%2fintern_fancom20%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=%e3%81%93%e3%81%ae%e6%8a%95%e7%a8%bf%e3%82%92%e3%83%81%e3%82%a7%e3%83%83%e3%82%af%e3%81%99%e3%82%8b %7b%20%20%20%20%20%20%20%20map%5b%5d%7d&amp;body=https%3a%2f%2fsagojo.dev%2fblog%2fintern_fancom20%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </div>
+    <div class="content">
+      
+      
+      
+      
+        
+        <p>株式会社ファンコミュニケーションズさんで<br>
+8月3日から7日までの5日間オンラインインターンをさせていただいたので、<br>
+参加記をまとめたいと思います。</p>
+<section class="toc">
+    <h2>目次</h2>
+    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#参加の経緯">参加の経緯</a></li>
+    <li><a href="#成果物">成果物</a></li>
+    <li><a href="#1日目">1日目</a></li>
+    <li><a href="#2日目">2日目</a></li>
+    <li><a href="#34日目">3~4日目</a></li>
+    <li><a href="#最終日">最終日</a></li>
+    <li><a href="#インターンの感想">インターンの感想</a></li>
+    <li><a href="#最後に">最後に</a></li>
+  </ol>
+</nav>
+</section>
+<h2 id="参加の経緯">参加の経緯</h2>
+<p>サポーターズさんの22卒対象エンジニア1on1面談イベントで、<br>
+趣味でRustでCコンパイラを作っているという話をしたところ、<br>
+インターンにRustの枠を新しく設けて参加させていただけるというお誘いをいただき、<br>
+参加する運びとなりました。</p>
+<p>やー本当に、ありがたいお話です…！</p>
+<p>選考は一応エントリーシートの提出, 面接, 技術テストと、<br>
+恐らく普通のインターンと同じような段取りで行われていたと思います。<br>
+(今回が初めてなので確証はないですが…)</p>
+<p>こんな感じで選考を終え、インターン初日を迎えました。</p>
+<h2 id="成果物">成果物</h2>
+<p>その前に作ったものを説明します。
+DSPと呼ばれるWeb広告の配信仲介サーバです。</p>
+<p>スマホなどでポップアップで広告を表示するアプリは、SSPと呼ばれるサーバに表示する広告をリクエストします。<br>
+SSPはそれを受けて複数のDSPに広告をリクエストします。<br>
+それぞれのDSPから渡された広告の中で最も入札金額が高いものがSSPの返却する広告として選ばれるっぽいです。</p>
+<p>DSPの話に戻りますが、SSPに広告を選ばせるために、<br>
+DSPはSSPからリクエストされると持っている広告データの中から適切な広告を1つ選んで返却します。<br>
+広告データには入札金額などは定められていないので、DSPの中でいい感じに決定します。
+(ここで機械学習などが使われます。)</p>
+<figure>
+    <img src="/img/tech/intern_fancom20/dsp.png"/> 
+</figure>
+
+<p>DSPがやることをまとめると、</p>
+<ol>
+<li>SSPからのリクエストを受け取る</li>
+<li>データベースから入っている広告データをn個取ってくる</li>
+<li>n個の広告のうち、リクエストしてきたアプリケーションをブロック対象としている広告を除外する<br>
+(競合アプリに広告出したりはしないですよね、多分)</li>
+<li>除外後の広告達を機械学習APIに投げ、それぞれの入札金額を決定してもらう</li>
+<li>SSPのリクエストで指定されていた最低入札金額よりも低い金額の広告を除外</li>
+<li>残った広告の中で最も高い入札金額の広告をSSPに返却する</li>
+</ol>
+<p>このような流れになります。</p>
+<p>その他DSPが行う作業として、</p>
+<ul>
+<li>アプリケーションから表示完了の通知を受け取る</li>
+<li>アプリケーションから広告をクリックしたという通知を受け取る</li>
+<li>全てのリクエスト・レスポンスのログを出力する</li>
+</ul>
+<p>などが今回要求されました。</p>
+<p>私が今回製作したmini-dspはプログラム部分は全てRustを使って実装しており、<br>
+シンプルな設計と速度が特徴となっています。</p>
+<h2 id="1日目">1日目</h2>
+<p>10時にメンターの方と顔合わせのミーティングを行い、<br>
+そのまま課題についての説明をしていただきました。<br>
+先ほどのDSPとSSPなどの仕組みの話は全く知らなかったので、この説明がなければ死んでいたと思います。<br>
+感謝ですね…！</p>
+<p>課題説明が40〜50分くらいで終わったので、<br>
+その後に実装の簡単な段取りを考えました。</p>
+<ul>
+<li>リクエストを受け取って適当なレスポンスを返すサーバ部分を書く</li>
+<li>機械学習APIのモックを作る</li>
+<li>ログ機能を実装する</li>
+<li>イベント通知を受け取る機能を書く</li>
+<li>DBから広告を取得する部分を書く</li>
+</ul>
+<p>大体これを一日1つ〜2つ実装していけば終わりそうかな、という見積もりでした。</p>
+<p>ここまでが午前中の話で、午後からは実装に入りました。</p>
+<p>1日目の実装はサーバと機械学習APIのモックの作成でした。</p>
+<p>サーバはRustの軽量・高速なWebフレームワークである<a href="https://actix.rs">actix-web</a>を使いました。
+<figure><a href="https://actix.rs">
+    <img src="/img/tech/intern_fancom20/actix.png"/> </a>
+</figure>
+<br>
+初めて使う上に、アップデートが激しいため見つかる参考資料も古いものが多くそこそこ苦労しましたが、とりあえず動く状態まで実装することができました。</p>
+<p>17時を目処にプルリクを投げ、ミーティングでコードレビューをしていただきました。</p>
+<h2 id="2日目">2日目</h2>
+<p>2日目は特にミーティングを行うこともなく朝から実装に入りました。<br>
+この日の実装は主にログ出力機能とイベント通知受け取り部分でした。</p>
+<p>ログ書き出し用の構造体を作るときに上手いことトレイトを利用して簡潔に実装することができて、<br>
+自分的には結構いい感じで書けたのでは、と思います。</p>
+<p>ログに出力する可能性のある構造体はToLogトレイトを実装するだけでログを吐き出す関数の引数に渡すことができるようになるような設計にしていて、このあとイベント通知受け取り部分を実装したときもログ部分をほとんど書き換えずにすみました。</p>
+<p>イベント通知受け取り部分に関しては、ログを吐くための構造体を書いた後、1日目に作ったサーバ部分のコードに少し書き足すだけで終わりました。</p>
+<h2 id="34日目">3~4日目</h2>
+<p>この2日間でDB接続部分を実装しました。<br>
+DBにPostgreSQLとRustのORMにdieselを利用しています。<br>
+当然これも初めて(というかDB使ったことなかった)なので、<br>
+悪戦苦闘しながら動かしていました。<br>
+幸い手元に<a href="https://www.amazon.co.jp/dp/B07QVQ7RDG/ref=cm_sw_r_tw_dp_x_s6MmFbZSJC62S">実践Rust入門</a>(自転車本)があり、この本の11章にDBと連携してアプリケーションを作る内容が載っていたのでめちゃめちゃに参考にしながら書いていきました。</p>
+<p>折角なのでDockerの知識をつけようと思いDocker環境で動くようにdocker-composeを書いていましたが、なかなかに分からず、丸2日溶かしてしまいました。</p>
+<p>まあ沼るのは割と分かっていたので先に書けるところを書いていてよかったなぁ、という感想でした。<br>
+計画勝ちみたいなものですね。</p>
+<h2 id="最終日">最終日</h2>
+<p>最終日は座談会と資料作成、発表を行いました。</p>
+<p>座談会ではZoomでファンコミュニケーションズさんに関する様々な質問をしたり、<br>
+技術系の雑談に近い話をしたりしていました。<br>
+どこの技術系イベントに行っても思うんですけど、やっぱり実際にエンジニアをやっていらっしゃる方々の話は本当に面白いので、いつも聞き入ってしまう感があります。<br>
+座談会はとても楽しい時間でした。</p>
+<p>それが終わるとプレゼン発表用の資料の作成を行いました。<br>
+そこそこ気合を入れて作ったので2〜3時間くらいかかったと思います。<br>
+作り終わるとメンターの方々にレビューをしていただき、そこからさらに資料を改良しました。</p>
+<p>プレゼンでの成果発表はオンラインで行いました。<br>
+僕はサークルで結構オンラインでLTなどを行っていたので<br>
+割とオンライン発表に慣れていたので、そこまで緊張はしませんでしたが、<br>
+慣れてなかったら辛かっただろうなと思います。<br>
+オンラインでプレゼンするの、反応が返ってこないので最初かなりやりにくいですよね。</p>
+<p>実演も事前に撮った動画を使ってグダらないよう気をつけました。</p>
+<figure>
+    <img src="/img/tech/intern_fancom20/presen.png"/> 
+</figure>
+
+<h2 id="インターンの感想">インターンの感想</h2>
+<p>感想ですが、まず普段趣味で書いてるのが活きた場面が結構あって、驚きました。<br>
+2日目のようにトレイトを使って上手いこと抽象化したり、<br>
+競技プログラミングでやってる感じで計算量をそれほど大きくせずにより簡潔に書いたりなど、普段やっていることが実際に動くものを作るときにもそのまま役立ったのはとても嬉しかったです。</p>
+<p>次に、初めて使う技術が多かったが思ったより苦労せず使えた、というのがあります。<br>
+いやまあ苦労したのは苦労したのですが、それでも最終的に動く状態までたどり着けて、<br>
+何も分からないみたいな状態でもそれなりに動かすことができるものなのだなぁと感じました。それとドキュメントの読み方の感覚とかも結構分かってきた感があります。<br>
+このあたりは普段の趣味プログラミングでは僕はあまりやらない範囲なので貴重な経験ができたと思います。</p>
+<p>後は、好きな言語で実際に業務っぽい動くプログラムが書けたのが良かったと思います。<br>
+結局最終的にはコード書いてれば楽しいタイプの人間なので、Rustで書かせてくれるのが本当に楽しかったです。</p>
+<h2 id="最後に">最後に</h2>
+<p>5日間という本当に短い期間でしたが、<br>
+すごく楽しい時間となりました。</p>
+<p>オンラインインターンなので細かい質問の投げにくさであったり、<br>
+実際の社内の雰囲気を感じ取ることが難しいという面もありますが、<br>
+それでもメンターの方々や人事の方がとてもよくサポートしてくれて、<br>
+これはこれでいい経験になったのではないかな、と考えています。<br>
+(これからもオンラインのインターンや仕事は増えそうですし。)</p>
+<p>機会があればぜひまた参加したいと思えるインターンでした。<br>
+本当にありがとうございました！</p>
+
+      
+    </div>
+    <footer>
+      <div class="stats">
+  
+    <ul class="categories">
+      
+        
+          <li><a class="article-terms-link" href="/categories/technologies/">technologies</a></li>
+        
+      
+    </ul>
+  
+  
+    <ul class="tags">
+      
+        
+          <li><a class="article-terms-link" href="/tags/%e3%82%a4%e3%83%b3%e3%82%bf%e3%83%bc%e3%83%b3/">インターン</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/rust/">Rust</a></li>
+        
+      
+    </ul>
+  
+</div>
+
+    </footer>
+  </article>
+  
+    
+  <article class="post">
+    
+    <div>
+      <h2 id="say-something">コメントをどうぞ</h2>
+        <form id="comment-form" class="new-comment" method="POST">
+          
+          <h3 class='reply-notice hidden'>
+            <span class='reply-name'></span>
+          </h3>
+
+          
+          <input type="hidden" name="options[entryId]" value="dd6ca2dda777ce8497cc7d44f1a85803">
+          <input type='hidden' name='fields[replyThread]' value=''>
+          <input type='hidden' name='fields[replyID]' value=''>
+          <input type='hidden' name='fields[replyName]' value=''>
+
+          
+          <input required name='fields[name]' type='text' placeholder='名前'>
+          <textarea required name='fields[body]' placeholder='内容' rows='10'></textarea>
+
+          
+          
+
+          
+          <div class='submit-notice'>
+            <strong class='submit-notice-text submit-success hidden'>コメントありがとうございます！承認されるとサイトに表示されます。</strong>
+            <strong class='submit-notice-text submit-failed hidden'>申し訳ありません。送信中にエラーが発生しました。必須入力フィールドがすべて入力されていることを確認して、もう一度やりなおしてください。</strong>
+          </div>
+
+          
+          <input type='submit' value='送信する' class='button'>
+          <input type='submit' value='送信しました' class='hidden button' disabled>
+          <input type='reset' value='リセット' class='button'>
+        </form>
+    </div>
+
+    
+    <div>
+      <h2>コメント</h2><p>まだコメントはありません.</p>
+      
+    </div>
+  </article>
+
+
+  
+  <div class="pagination">
+    
+    
+      <a href="/blog/first/" class="button right"><span>ブログ立てました</span></a>
+    
+  </div>
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>最近の投稿</h1>
+      </header>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/intern_fancom20/">ファンコミュニケーションズ オンラインインターン参加記</a></h2>
+          <time class="published" datetime="2020-08-11 18:00:00 &#43;0900 JST">2020-08-11</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/first/">ブログ立てました</a></h2>
+          <time class="published" datetime="2020-08-09 00:17:04 &#43;0900 JST">2020-08-09</time>
+        </header>
+      </article>
+      
+      
+    </section>
+  
+
+  
+    
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+          
+          <li>
+              <a href="/categories/technologies/">technologies<span class="count">2</span></a>
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/3to5thpower" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/sagoj0_" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:is0468ri@ed.ritsumei.ac.jp" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    © 2020 3^5の備忘録
+      <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.73.0' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      <script src="/js/highlight.js"></script>
+    
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.3c56a98e24f57831b0f107da00143440b7a2bd20bb724682e50cd99b60471fef.js" integrity="sha256-PFapjiT1eDGw8QfaABQ0QLeivSC7ckaC5QzZm2BHH&#43;8="></script>
+    <script src="/js/add-on.js"></script>
+    </div>
+  </body>
+</html>

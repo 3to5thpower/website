@@ -4,12 +4,42 @@
   
   <url>
     <loc>https://sagojo.dev/</loc>
-    <lastmod>2020-08-09T00:17:04+09:00</lastmod>
+    <lastmod>2020-08-11T18:00:00+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://sagojo.dev/blog/</loc>
-    <lastmod>2020-08-09T00:17:04+09:00</lastmod>
+    <lastmod>2020-08-11T18:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sagojo.dev/categories/</loc>
+    <lastmod>2020-08-11T18:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sagojo.dev/tags/rust/</loc>
+    <lastmod>2020-08-11T18:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sagojo.dev/tags/</loc>
+    <lastmod>2020-08-11T18:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sagojo.dev/categories/technologies/</loc>
+    <lastmod>2020-08-11T18:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sagojo.dev/tags/%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%B3/</loc>
+    <lastmod>2020-08-11T18:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sagojo.dev/blog/intern_fancom20/</loc>
+    <lastmod>2020-08-11T18:00:00+09:00</lastmod>
   </url>
   
   <url>
@@ -18,22 +48,7 @@
   </url>
   
   <url>
-    <loc>https://sagojo.dev/categories/</loc>
-    <lastmod>2020-08-09T00:17:04+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://sagojo.dev/tags/hugo/</loc>
-    <lastmod>2020-08-09T00:17:04+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://sagojo.dev/tags/</loc>
-    <lastmod>2020-08-09T00:17:04+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://sagojo.dev/categories/technologies/</loc>
     <lastmod>2020-08-09T00:17:04+09:00</lastmod>
   </url>
   

@@ -5,10 +5,28 @@
     <link>https://sagojo.dev/tags/</link>
     <description>Recent content in Tags on 3^5の備忘録</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 09 Aug 2020 00:17:04 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 11 Aug 2020 18:00:00 +0900</lastBuildDate>
     
 	<atom:link href="https://sagojo.dev/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Rust</title>
+      <link>https://sagojo.dev/tags/rust/</link>
+      <pubDate>Tue, 11 Aug 2020 18:00:00 +0900</pubDate>
+      
+      <guid>https://sagojo.dev/tags/rust/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>インターン</title>
+      <link>https://sagojo.dev/tags/%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%B3/</link>
+      <pubDate>Tue, 11 Aug 2020 18:00:00 +0900</pubDate>
+      
+      <guid>https://sagojo.dev/tags/%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%B3/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>blog</title>
