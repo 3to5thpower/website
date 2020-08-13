@@ -5,10 +5,37 @@
     <link>https://sagojo.dev/tags/</link>
     <description>Recent content in Tags on 3^5の備忘録</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 11 Aug 2020 18:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 13 Aug 2020 19:30:00 +0900</lastBuildDate>
     
 	<atom:link href="https://sagojo.dev/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>リアイベ</title>
+      <link>https://sagojo.dev/tags/%E3%83%AA%E3%82%A2%E3%82%A4%E3%83%99/</link>
+      <pubDate>Thu, 13 Aug 2020 19:30:00 +0900</pubDate>
+      
+      <guid>https://sagojo.dev/tags/%E3%83%AA%E3%82%A2%E3%82%A4%E3%83%99/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>佐世保</title>
+      <link>https://sagojo.dev/tags/%E4%BD%90%E4%B8%96%E4%BF%9D/</link>
+      <pubDate>Thu, 13 Aug 2020 19:30:00 +0900</pubDate>
+      
+      <guid>https://sagojo.dev/tags/%E4%BD%90%E4%B8%96%E4%BF%9D/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>艦これ</title>
+      <link>https://sagojo.dev/tags/%E8%89%A6%E3%81%93%E3%82%8C/</link>
+      <pubDate>Thu, 13 Aug 2020 19:30:00 +0900</pubDate>
+      
+      <guid>https://sagojo.dev/tags/%E8%89%A6%E3%81%93%E3%82%8C/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Rust</title>
